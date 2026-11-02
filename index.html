@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=61">
+<link rel="stylesheet" href="styles.css?v=113">
 </head>
 <body>
 
@@ -139,7 +139,7 @@
       <li><a href="#company"><span class="btn_label" data-label="Company">Company</span></a></li>
       <li><a href="#newsroom"><span class="btn_label" data-label="Newsroom">Newsroom</span></a></li>
     </ul>
-    <a class="nav_cta" href="#contact"><span class="btn_label" data-label="Work with us">Work with us</span></a>
+    <button class="nav_cta" type="button" data-connect><span class="btn_label" data-label="Work with us">Work with us</span></button>
   </nav>
 
   <button class="menu_btn" data-menu-toggle aria-label="Open menu" aria-expanded="false">
@@ -153,7 +153,7 @@
         <li><a href="#company"><span>Company</span></a></li>
         <li><a href="#newsroom"><span>Newsroom</span></a></li>
       </ul>
-      <a class="u-cta -light" href="#contact">
+      <button class="u-cta -light" type="button" data-connect>
         <span class="cta_pill"><span class="btn_label" data-label="Work with us">Work with us</span></span>
         <span class="cta_arrow" aria-hidden="true">→</span>
       </a>
@@ -224,54 +224,15 @@
       <span class="ed_corner -tl u-mono">AI+ / Platform</span>
       <span class="ed_corner -tr u-mono">01 — 03</span>
 
-      <div class="ed_scatter" aria-hidden="true">
-          <figure class="sc" style="--x:30%;--y:0%;--w:6.2%" data-drift="56">
-            <img src="assets/partners/partner-3.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:62%;--y:1%;--w:5.4%" data-drift="64">
-            <img src="assets/mentors/michele-catasta.jpg" alt="" loading="lazy" decoding="async">
-            <figcaption class="sc_cap u-mono">— Replit</figcaption>
-          </figure>
-          <figure class="sc" style="--x:1.5%;--y:18%;--w:7.5%" data-drift="34">
-            <img src="assets/mentors/parag-agrawal.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:8%;--y:42%;--w:6.4%" data-drift="52">
-            <img src="assets/stats/stat-2.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:0.5%;--y:64%;--w:8.2%" data-drift="22">
-            <img src="assets/mentors/lenjoy-lin.jpg" alt="" loading="lazy" decoding="async">
-            <figcaption class="sc_cap u-mono">— Genspark</figcaption>
-          </figure>
-          <figure class="sc" style="--x:14%;--y:82%;--w:5.6%" data-drift="44">
-            <img src="assets/mentors/ryan-wang.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:87%;--y:10%;--w:7.8%" data-drift="48">
-            <img src="assets/mentors/hassaan-raza.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:93%;--y:36%;--w:6.0%" data-drift="60">
-            <img src="assets/mentors/philip-rathle.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:80%;--y:56%;--w:8.6%" data-drift="26">
-            <img src="assets/stats/stat-1.jpg" alt="" loading="lazy" decoding="async">
-            <figcaption class="sc_cap u-mono">— Renaissance 2026</figcaption>
-          </figure>
-          <figure class="sc" style="--x:23%;--y:90%;--w:6.0%" data-drift="30">
-            <img src="assets/stats/stat-4.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-          <figure class="sc" style="--x:71%;--y:90%;--w:5.4%" data-drift="50">
-            <img src="assets/partners/partner-1.jpg" alt="" loading="lazy" decoding="async">
-          </figure>
-      </div>
-
       <div class="ed_center">
-        <span class="u-tag" data-inview><i></i>The integrated platform</span>
+        <span class="u-tag" data-reveal="0"><i></i>The integrated platform</span>
         <h2 class="ed_title" data-fill>AI adoption is accelerating.Humanity is at its inflection point. We are driving that forward.</h2>
         <svg class="ed_line" viewBox="0 0 420 90" fill="none" aria-hidden="true" data-ed-line>
           <path d="M6 62C46 18 96 6 140 30c40 22 8 62 42 58 36-4 40-56 84-58 40-2 62 34 100 26 24-5 38-22 82-38"
                 stroke="var(--c-azure)" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-        <p class="ed_text" data-inview>Models trained on our own data propose the hypothesis. High-throughput experimental platforms test it against living systems. What comes back — including, and especially, what fails — folds straight into the next generation of datasets, models and molecules.</p>
-        <div data-inview>
+        </svg>We've been the partner of choice for many leading AI startups and enterprises, spearheading AI adoption - bridging frontier labs with enterprise AI teams, coordinating groundbreaking product launches, and connecting AI startups with top tier investors.
+        <p class="ed_text" data-reveal="2"></p>
+        <div data-reveal="3">
           <a class="u-cta" href="#company">
             <span class="cta_pill"><span class="btn_label" data-label="Discover our company">Discover our company</span></span>
             <span class="cta_arrow" aria-hidden="true">→</span>
@@ -289,64 +250,49 @@
     </div>
   </section>
 
-  <!-- ══ NUMBERS ══ -->
+  <!-- NUMBERS -->
   <section class="c-stats" data-stats>
     <div class="stats_sticky">
-      <div class="stats_stage" data-stats-stage>
-        <article class="page" data-page style="--i:0">
-          <img class="page_img" src="assets/stats/stat-1.jpg" alt="" decoding="async" width="1800" height="1125">
-          <span class="page_veil" aria-hidden="true"></span>
-          <span class="page_shade" aria-hidden="true"></span>
-          <svg class="page_type" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" data-page-type>
-            <defs>
-              <path id="arc0" d="M -220 596 Q 800 432 1820 596" fill="none"></path>
-            </defs>
-            <text style="font-size:165px" text-anchor="middle">
-              <textPath href="#arc0" startOffset="50%" data-page-path>40,000+ Members</textPath>
-            </text>
-          </svg>
+      <div class="stats_bed" aria-hidden="true">
+        <img class="bed_img" src="assets/stats/backdrop.jpg" alt="" decoding="async" data-bed>
+        <span class="bed_veil"></span>
+      </div>
+
+      <div class="stats_stack">
+        <article class="slab -mint" data-slab style="--i:0">
+          <img class="slab_mark" src="assets/aiplus-logo.png" alt="" aria-hidden="true">
+          <div class="slab_body">
+            <p class="slab_label u-mono">01 — The community</p>
+            <h3 class="slab_title">40,000+ Members</h3>
+            <p class="slab_text">AI+ is a global community of builders, founders and researchers at the epicenter of the AI renaissance.</p>
+          </div>
         </article>
-        <article class="page" data-page style="--i:1">
-          <img class="page_img" src="assets/stats/stat-2.jpg" alt="" fetchpriority="low" decoding="async" width="1800" height="1125">
-          <span class="page_veil" aria-hidden="true"></span>
-          <span class="page_shade" aria-hidden="true"></span>
-          <svg class="page_type" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" data-page-type>
-            <defs>
-              <path id="arc1" d="M -220 596 Q 800 432 1820 596" fill="none"></path>
-            </defs>
-            <text style="font-size:188px" text-anchor="middle">
-              <textPath href="#arc1" startOffset="50%" data-page-path>&gt;300 Events</textPath>
-            </text>
-          </svg>
+        <article class="slab -bone" data-slab style="--i:1">
+          <img class="slab_mark" src="assets/aiplus-logo.png" alt="" aria-hidden="true">
+          <div class="slab_body">
+            <p class="slab_label u-mono">02 — Convenings</p>
+            <h3 class="slab_title">&gt;300 Events</h3>
+            <p class="slab_text">We convene the people shaping AI through summits, salons and gatherings across the world.</p>
+          </div>
         </article>
-        <article class="page" data-page style="--i:2">
-          <img class="page_img" src="assets/stats/stat-3.jpg" alt="" fetchpriority="low" decoding="async" width="1800" height="1125">
-          <span class="page_veil" aria-hidden="true"></span>
-          <span class="page_shade" aria-hidden="true"></span>
-          <svg class="page_type" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" data-page-type>
-            <defs>
-              <path id="arc2" d="M -220 596 Q 800 432 1820 596" fill="none"></path>
-            </defs>
-            <text style="font-size:103px" text-anchor="middle">
-              <textPath href="#arc2" startOffset="50%" data-page-path>10–15 Investments Yearly</textPath>
-            </text>
-          </svg>
+        <article class="slab -sky" data-slab style="--i:2">
+          <img class="slab_mark" src="assets/aiplus-logo.png" alt="" aria-hidden="true">
+          <div class="slab_body">
+            <p class="slab_label u-mono">03 — Capital</p>
+            <h3 class="slab_title">10–15 Investments Yearly</h3>
+            <p class="slab_text">From first commit to first round, our members build in public and grow alongside each other.</p>
+          </div>
         </article>
-        <article class="page" data-page style="--i:3">
-          <img class="page_img" src="assets/stats/stat-4.jpg" alt="" fetchpriority="low" decoding="async" width="1800" height="1125">
-          <span class="page_veil" aria-hidden="true"></span>
-          <span class="page_shade" aria-hidden="true"></span>
-          <svg class="page_type" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" data-page-type>
-            <defs>
-              <path id="arc3" d="M -220 596 Q 800 432 1820 596" fill="none"></path>
-            </defs>
-            <text style="font-size:103px" text-anchor="middle">
-              <textPath href="#arc3" startOffset="50%" data-page-path>Trusted by 50+ Companies</textPath>
-            </text>
-          </svg>
+        <article class="slab -deep" data-slab style="--i:3">
+          <img class="slab_mark" src="assets/aiplus-logo.png" alt="" aria-hidden="true">
+          <div class="slab_body">
+            <p class="slab_label u-mono">04 — Partners</p>
+            <h3 class="slab_title">Trusted by 50+ Companies</h3>
+            <p class="slab_text">The premier community of AI founders, researchers and builders powering adoption across enterprise and consumer use cases.</p>
+          </div>
         </article>
       </div>
-      <div class="stats_dots" data-stats-dots aria-hidden="true"><i class="is-on"></i><i></i><i></i><i></i></div>
+
     </div>
   </section>
 
@@ -354,38 +300,78 @@
   <section class="c-marquee">
     <div class="marquee_track" data-marquee-track>
       <div class="marquee_set">
-        <span>Connecting the Human Intelligence behind AI</span><span class="mq_dash">–</span>
-        <span>Connecting the Human Intelligence behind AI</span><span class="mq_dash">–</span>
+        <span>AGENTS</span><span class="mq_dash">–</span>
+        <span>AI INFRA</span><span class="mq_dash">–</span>
+        <span>MULTIMODAL</span><span class="mq_dash">–</span>
+        <span>PHYSICAL AI</span><span class="mq_dash">–</span>
       </div>
     </div>
   </section>
 
   <!-- COMPANY -->
-  <section class="c-story" id="company" data-story>
-    <div class="story_head u-container">
-      <span class="u-tag" data-inview><i></i>Our company</span>
-      <div class="story_notes">
-        <p data-inview>We are advancing a pipeline of novel small molecule therapeutics, built on multimodal aging-biology datasets and a drug design platform of our own making — backed by a team assembled to push at how biology can be measured, modelled and engineered.</p>
-        <p data-inview>Our work has been published repeatedly across leading journals in biology and medicine, a record we read as evidence the approach holds.</p>
+  <section class="c-story" id="company">
+    <div class="story_intro u-container">
+      <h2 class="story_title" data-fill>Connecting the Human Intelligence behind AI</h2>
+
+      <div class="story_about">
+        <span class="story_kicker u-mono" data-reveal="0">About AI+</span>
+        <div class="story_lead">
+          <p class="story_statement" data-reveal="1">AI+ is the premier community of AI founders, researchers, and builders powering adoption of AI across enterprise and consumer use cases.</p>
+          <p class="story_sub" data-reveal="2">We started in the San Francisco Bay Area, and now have a global presence, pushing the frontiers with AI organizations worldwide.</p>
+          <div data-reveal="3">
+            <a class="u-cta" href="https://www.youtube.com/live/smL7H2Z2sTI?si=BYj_lr06JFJcimSW" target="_blank" rel="noopener">
+              <span class="cta_pill"><span class="btn_label" data-label="Watch Renaissance 2026">Watch Renaissance 2026</span></span>
+              <span class="cta_arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <h2 class="story_title u-container" data-fill>Bold research to unlock small molecule discovery for human health and aging.</h2>
-
-    <div class="story_foot u-container">
-      <p class="story_close" data-inview>Today the mission is age-related disease. The longer ambition is larger: to rewrite the biology of aging itself.</p>
-      <div data-inview>
-        <a class="u-cta" href="#contact">
-          <span class="cta_pill"><span class="btn_label" data-label="Learn more about us">Learn more about us</span></span>
-          <span class="cta_arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+    <div class="files u-container">
+        <article class="file -deep" data-file style="--i:0">
+          <span class="file_tab">
+            <span class="file_no u-mono">01</span>
+            <span class="file_name">Industry Discussions</span>
+          </span>
+          <div class="file_panel">
+            <div class="file_body">
+              <p class="file_text">Closed doors panels and discussions with core engineers and scientists from leading AI labs and startups.</p>
+              <figure class="file_media">
+                <img src="assets/stats/stat-3.jpg" alt="A panel session at an AI+ event" decoding="async" fetchpriority="low" width="1800" height="1125">
+              </figure>
+            </div>
+          </div>
+        </article>
+        <article class="file -azure" data-file style="--i:1">
+          <span class="file_tab">
+            <span class="file_no u-mono">02</span>
+            <span class="file_name">Founder Dinners</span>
+          </span>
+          <div class="file_panel">
+            <div class="file_body">
+              <p class="file_text">Curated gatherings where we help AI startups close customers, work with enterprises, and raise funding.</p>
+              <figure class="file_media">
+                <img src="assets/stats/founder-dinner.jpg" alt="Founders gathered at an AI+ dinner" decoding="async" fetchpriority="low" width="1800" height="1125">
+              </figure>
+            </div>
+          </div>
+        </article>
+        <article class="file -dark" data-file style="--i:2">
+          <span class="file_tab">
+            <span class="file_no u-mono">03</span>
+            <span class="file_name">Product Launches</span>
+          </span>
+          <div class="file_panel">
+            <div class="file_body">
+              <p class="file_text">AI+ is your launchpad — your one stage to launch anything in AI with maximum impact.</p>
+              <figure class="file_media">
+                <img src="assets/stats/product-launch.jpg" alt="A product launch on the main stage at Renaissance" decoding="async" fetchpriority="low" width="1800" height="1125">
+              </figure>
+            </div>
+          </div>
+        </article>
     </div>
-
-    <figure class="story_plate" data-story-plate>
-      <img src="assets/company-web.jpg" alt="The AI+ community at a gathering" width="1800" height="1200" data-story-img>
-      <figcaption class="u-mono">— Renaissance 2026, San Francisco</figcaption>
-    </figure>
   </section>
 
   <!-- ══ PARTNERS ══ -->
@@ -706,12 +692,12 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/michael-grinich.jpg" alt="Michael Grinich" loading="lazy" decoding="async" width="700" height="700">
-            <span class="mentor_badge">WorkOS</span>
+            <img class="mentor_photo" src="assets/mentors/nathan-xu.jpg" alt="Nathan Xu" loading="lazy" decoding="async" width="700" height="700">
+            <span class="mentor_badge">PLAUD</span>
           </div>
           <div class="mentor_info">
-            <h3 class="mentor_name">Michael Grinich</h3>
-            <p class="mentor_role">Founder</p>
+            <h3 class="mentor_name">Nathan Xu</h3>
+            <p class="mentor_role">Co-founder, CEO</p>
           </div>
         </article>
       </div>
@@ -784,29 +770,29 @@
           <img class="logo_img -invert" src="assets/aiplus-logo.png" alt="AI+" width="237" height="236">
         </a>
         <p class="footer_blurb">AI+ is the premier community of AI founders, researchers, and builders powering adoption of AI across enterprise and consumer use cases.</p>
-        <a class="u-cta -light" href="mailto:hello@aiplus.dev">
+        <button class="u-cta -light" type="button" data-connect>
           <span class="cta_pill"><span class="btn_label" data-label="Work with us">Work with us</span></span>
           <span class="cta_arrow" aria-hidden="true">↗</span>
-        </a>
+        </button>
       </div>
 
       <nav class="footer_col">
-        <h3 class="footer_col_title">Science</h3>
+        <h3 class="footer_col_title">Community</h3>
         <ul>
-          <li><a href="#platform"><span class="btn_label" data-label="Platform">Platform</span></a></li>
-          <li><a href="#platform"><span class="btn_label" data-label="Aging datasets">Aging datasets</span></a></li>
-          <li><a href="#platform"><span class="btn_label" data-label="Drug design">Drug design</span></a></li>
-          <li><a href="#newsroom"><span class="btn_label" data-label="Publications">Publications</span></a></li>
+          <li><a href="#company"><span class="btn_label" data-label="What we do">What we do</span></a></li>
+          <li><a href="#mentors"><span class="btn_label" data-label="Our mentors">Our mentors</span></a></li>
+          <li><a href="#partners"><span class="btn_label" data-label="Partners">Partners</span></a></li>
+          <li><a href="#platform"><span class="btn_label" data-label="The platform">The platform</span></a></li>
         </ul>
       </nav>
 
       <nav class="footer_col">
-        <h3 class="footer_col_title">Company</h3>
+        <h3 class="footer_col_title">Events</h3>
         <ul>
-          <li><a href="#company"><span class="btn_label" data-label="About us">About us</span></a></li>
-          <li><a href="#mentors"><span class="btn_label" data-label="Our mentors">Our mentors</span></a></li>
-          <li><a href="#partners"><span class="btn_label" data-label="Partners">Partners</span></a></li>
-          <li><a href="#contact"><span class="btn_label" data-label="Careers">Careers</span></a></li>
+          <li><a href="https://renaissance.aiplus.dev/" target="_blank" rel="noopener"><span class="btn_label" data-label="Renaissance 2026">Renaissance 2026</span></a></li>
+          <li><a href="#company"><span class="btn_label" data-label="Industry discussions">Industry discussions</span></a></li>
+          <li><a href="#company"><span class="btn_label" data-label="Founder dinners">Founder dinners</span></a></li>
+          <li><a href="#company"><span class="btn_label" data-label="Product launches">Product launches</span></a></li>
         </ul>
       </nav>
 
@@ -814,8 +800,8 @@
         <h3 class="footer_col_title">Connect</h3>
         <ul>
           <li><a href="#newsroom"><span class="btn_label" data-label="Newsroom">Newsroom</span></a></li>
-          <li><a href="#contact"><span class="btn_label" data-label="Contact us">Contact us</span></a></li>
-          <li><a href="#contact"><span class="btn_label" data-label="Media enquiries">Media enquiries</span></a></li>
+          <li><a href="mailto:team@aiplus.dev"><span class="btn_label" data-label="Contact us">Contact us</span></a></li>
+          <li><a href="https://doodle.com/bp/shreyalahiri/30-mins-discovery-call" target="_blank" rel="noopener"><span class="btn_label" data-label="Book a call">Book a call</span></a></li>
         </ul>
       </nav>
     </div>
@@ -842,13 +828,9 @@
         <li><a href="#"><span class="btn_label" data-label="Privacy Policy">Privacy Policy</span></a></li>
         <li><a href="#"><span class="btn_label" data-label="Terms and Conditions">Terms and Conditions</span></a></li>
         <li><a href="#"><span class="btn_label" data-label="Cookie Policy">Cookie Policy</span></a></li>
-        <li><a href="#contact"><span class="btn_label" data-label="Contact Us">Contact Us</span></a></li>
+        <li><a href="mailto:team@aiplus.dev"><span class="btn_label" data-label="Contact Us">Contact Us</span></a></li>
       </ul>
 
-      <div class="footer_credit">
-        <span class="u-mono">Creative partners</span>
-        <div class="credit_marks"><span>Northwind</span><span>Lumina Studio</span></div>
-      </div>
 
       <button class="footer_up" data-scroll-top aria-label="Back to top">↑</button>
     </div>
@@ -862,6 +844,37 @@
   <p class="footer_copy u-mono">© 2026 AI+. All rights reserved.</p>
 </footer>
 
-<script src="main.js?v=61"></script>
+
+<!-- ══ WORK WITH US ══ -->
+<div class="c-connect" data-connect-panel hidden>
+  <div class="connect_scrim" data-connect-close></div>
+  <div class="connect_card" role="dialog" aria-modal="true" aria-labelledby="connectTitle">
+    <button class="connect_x" type="button" data-connect-close aria-label="Close">×</button>
+    <span class="u-tag"><i></i>Work with us</span>
+    <h2 class="connect_title" id="connectTitle">Let's build together</h2>
+    <p class="connect_text">Tell us what you're working on, or take thirty minutes with us — whichever suits.</p>
+
+    <div class="connect_options">
+      <a class="connect_opt" href="https://doodle.com/bp/shreyalahiri/30-mins-discovery-call" target="_blank" rel="noopener">
+        <span class="connect_opt_ico" aria-hidden="true">◷</span>
+        <span class="connect_opt_body">
+          <span class="connect_opt_name">Book a call</span>
+          <span class="connect_opt_meta u-mono">30 min discovery call</span>
+        </span>
+        <span class="cta_arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="connect_opt" href="mailto:team@aiplus.dev">
+        <span class="connect_opt_ico" aria-hidden="true">✉</span>
+        <span class="connect_opt_body">
+          <span class="connect_opt_name">Send a mail</span>
+          <span class="connect_opt_meta u-mono">team@aiplus.dev</span>
+        </span>
+        <span class="cta_arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="main.js?v=113"></script>
 </body>
 </html>

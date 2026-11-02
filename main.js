@@ -301,115 +301,155 @@
     });
   }
 
-  /* ── 5b2. Editorial: scattered work drifting ───────────── */
-  // Each piece travels at its own rate as the section crosses the viewport,
-  // and the accent line draws itself in step with it.
-  const edSection = document.querySelector('[data-editorial]');
-  const edTiles   = [...document.querySelectorAll('[data-drift]')];
-  const edLine    = document.querySelector('[data-ed-line] path');
-  const edMQ      = matchMedia('(min-width:901px)');
-  if (edLine) {
-    const len = edLine.getTotalLength();
-    edLine.style.setProperty('--len', len.toFixed(1));
+  /* ── 5a2. Section hand-offs ────────────────────────────── */
+  // A section doesn't scroll away; it settles back — shrinking, dimming and
+  // softening — while the next one rides up over it. One surface passing
+  // behind another rather than two blocks meeting at a line.
+  const handoffs = [
+    { back: document.querySelector('.hero_sticky'),   front: document.querySelector('[data-editorial]') },
+    { back: document.querySelector('[data-editorial]'), front: document.querySelector('[data-stats]') }
+  ].filter(h => h.back && h.front);
+
+  function updateHandoff() {
+    if (reduce) return;
+    for (const h of handoffs) {
+      const r = h.front.getBoundingClientRect();
+      if (r.top > innerHeight + 40 || r.top < -innerHeight) {   // out of play
+        if (h.back.style.transform) {
+          h.back.style.transform = '';
+          h.back.style.filter = '';
+          h.back.style.removeProperty('--recede');
+        }
+        continue;
+      }
+      // 0 as the next section's top touches the bottom of the frame → 1 once
+      // it has covered it
+      const p = clamp((innerHeight - r.top) / innerHeight);
+      const e = p * p;                          // let it hang back, then go
+      h.back.style.transform =
+        `scale(${(1 - 0.07 * e).toFixed(4)}) translateY(${(-2.5 * e).toFixed(2)}vh)`;
+      h.back.style.filter =
+        `brightness(${(1 - 0.4 * e).toFixed(3)}) blur(${(3.5 * e).toFixed(2)}px)`;
+      h.back.style.setProperty('--recede', e.toFixed(3));
+    }
   }
+
+  /* ── 5b2. Editorial: the flight, and copy arriving ─────── */
+  // A paper plane rides a path that starts a screen-height above this section,
+  // so it flies in from the page before. The trail draws itself just ahead of
+  // the nose, and the centre column arrives a piece at a time behind it.
+  const edSection = document.querySelector('[data-editorial]');
+  const edLine    = document.querySelector('[data-ed-line] path');
+  if (edLine) edLine.style.setProperty('--len', edLine.getTotalLength().toFixed(1));
 
   function updateEditorial() {
     if (!edSection || reduce) return;
     const r = edSection.getBoundingClientRect();
-    if (r.bottom < -200 || r.top > innerHeight + 200) return;
-    // -1 entering from below → 0 centred → 1 leaving above
-    const t = ((innerHeight - r.top) / (innerHeight + r.height)) * 2 - 1;
+    if (r.bottom < -300 || r.top > innerHeight + 300) return;
 
-    if (edMQ.matches) {
-      edTiles.forEach(el => {
-        const rate = +el.dataset.drift || 30;
-        el.style.transform = `translate3d(0, ${(t * -rate).toFixed(1)}px, 0)`;
-      });
-    }
-    // the line draws as the middle of the section reaches the middle of the screen
+    // 0 as the section's top reaches the bottom of the screen → 1 once its
+    // bottom has passed the top
+    const t = clamp((innerHeight - r.top) / (innerHeight + r.height));
+
+    // the accent line draws as the headline finishes
     if (edLine) {
       const len = edLine.getTotalLength();
-      const drawn = clamp((0.35 - t) / 0.5);
-      edLine.style.strokeDashoffset = (len * (1 - drawn)).toFixed(1);
+      edLine.style.strokeDashoffset = (len * (1 - clamp((t - 0.34) / 0.22))).toFixed(1);
+    }
+
+  }
+
+  /* ── 5b2b. Reveals: copy arriving out of focus ─────────── */
+  // Each piece is driven by its own position in the frame rather than by any
+  // one section, so the same treatment works wherever it is used. The index on
+  // data-reveal staggers the group without needing a wrapper.
+  const reveals = [...document.querySelectorAll('[data-reveal]')];
+
+  function updateReveals() {
+    if (!reveals.length || reduce) return;
+    for (const el of reveals) {
+      const r = el.getBoundingClientRect();
+      if (r.top > innerHeight + 100) continue;      // not yet due
+      const i = +el.dataset.reveal || 0;
+      let e = 1;
+      if (r.bottom > -100) {                         // still in play
+        const start = innerHeight * 0.88 - i * 46;
+        e = clamp((start - r.top) / (innerHeight * 0.3));
+      }
+      const o = e === 1 ? 1 : 1 - Math.pow(1 - e, 3);
+      el.style.opacity = o.toFixed(3);
+      el.style.transform = `translateY(${((1 - o) * 22).toFixed(1)}px)`;
+      el.style.filter = o > 0.995 ? 'none' : `blur(${((1 - o) * 10).toFixed(1)}px)`;
     }
   }
 
-  /* ── 5b3. Story: the plate arriving ────────────────────── */
-  // The photograph rises into place as the section leaves, and its image
-  // travels slower than its frame — the plate fills, then settles.
-  const storyPlate = document.querySelector('[data-story-plate]');
-  const storyImg   = document.querySelector('[data-story-img]');
+  /* ── 5b3. Files: opening as each one settles ───────────── */
+  // A file counts as open once it has reached its resting place near the top
+  // of the frame; --open drives the contents so a file reads as being pulled
+  // out of the drawer rather than simply scrolling past.
+  const files = [...document.querySelectorAll('[data-file]')];
 
-  function updateStory() {
-    if (!storyPlate || reduce) return;
-    const r = storyPlate.getBoundingClientRect();
-    if (r.bottom < -200 || r.top > innerHeight + 200) return;
-    // 0 as the plate's top reaches the bottom of the screen → 1 once it is up
-    const t = clamp((innerHeight - r.top) / (innerHeight * 0.9));
-    const e = 1 - Math.pow(1 - t, 3);
-    storyPlate.style.transform = `translate3d(0, ${((1 - e) * 90).toFixed(1)}px, 0)`;
-    if (storyImg) {
-      storyImg.style.transform = `translate3d(0, ${((1 - e) * -60).toFixed(1)}px, 0) scale(${(1.12 - 0.12 * e).toFixed(3)})`;
-    }
+  function updateFiles() {
+    if (!files.length || reduce) return;
+    files.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) { return; }
+      // 0 while it is still climbing, 1 once it has arrived
+      const rest = parseFloat(getComputedStyle(el).top) || 0;
+      const open = clamp((innerHeight * 0.72 - r.top) / (innerHeight * 0.72 - rest));
+      el.style.setProperty('--open', (open === 1 ? 1 : 1 - Math.pow(1 - open, 3)).toFixed(3));
+    });
   }
 
-  /* ── 5c. Numbers: turning the pages ────────────────────── */
-  // The pad is pinned; scroll turns one page at a time. A page rotates on its
-  // top edge until it is past vertical, by which point the next figure has
-  // faded up underneath it — so a turn reads as one movement, not two.
-  const statsSec  = document.querySelector('[data-stats]');
-  const pages     = [...document.querySelectorAll('[data-page]')];
-  const pageDots  = [...document.querySelectorAll('[data-stats-dots] i')];
-  let activeDot = 0;
+  /* ── 5c. Numbers: slabs stacking ───────────────────────── */
+  // One slab per figure. Each rises from below the frame, lands, then is
+  // covered by the next — tilting back a little and dropping into shadow as it
+  // goes. The photograph behind cross-fades on the same clock, so the section
+  // never cuts; it only ever slides.
+  const statsSec = document.querySelector('[data-stats]');
+  const slabs    = [...document.querySelectorAll('[data-slab]')];
+  const beds     = [...document.querySelectorAll('[data-bed]')];
 
   function updateStats() {
-    if (!statsSec || !pages.length || reduce) return;
+    if (!statsSec || !slabs.length || reduce) return;
     const total = statsSec.offsetHeight - window.innerHeight;
     if (total <= 0) return;
     const p = clamp(-statsSec.getBoundingClientRect().top / total);
-    // a short hold at each end so the first and last figures can be read
-    const s = clamp((p - 0.08) / 0.84) * (pages.length - 1);
 
-    pages.forEach((el, i) => {
-      // how far this sheet has arrived, and how far the next has covered it
-      const arrive = i === 0 ? 1 : clamp(s - (i - 1));
-      const a = arrive === 1 ? 1 : 1 - Math.pow(1 - arrive, 3);
-      const leave = clamp(s - i);
-      const l = leave === 0 ? 0 : 1 - Math.pow(1 - leave, 2.4);
+    // The pin opens on the photograph alone, so the frame is read before
+    // anything covers it; the slabs then rise one at a time; the last one
+    // holds while the section scrolls away.
+    const LEAD = 0.16, TAIL = 0.9;
+    const s = clamp((p - LEAD) / (TAIL - LEAD)) * slabs.length - 1;
 
-      // it swings in on an angle from below, straightens, then settles back
-      const rot = (1 - a) * 9 - l * 4;
-      const ty  = (1 - a) * 44 - l * 9;
-      const sc  = 1 + (1 - a) * 0.06 - l * 0.05;
-      el.style.transform = `translateY(${ty.toFixed(2)}%) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
-      el.style.opacity = a < 0.02 ? '0' : '1';
+    slabs.forEach((el, i) => {
+      // how far this slab has risen, and how far the next has covered it
+      const rise = clamp(s - (i - 1));
+      const r = rise === 1 ? 1 : 1 - Math.pow(1 - rise, 3);
+      const cover = clamp(s - i);
+      const c = cover === 0 ? 0 : 1 - Math.pow(1 - cover, 2.2);
 
-      // the covered sheet falls into shadow
-      const shade = el.querySelector('.page_shade');
-      if (shade) shade.style.opacity = (l * 0.72).toFixed(3);
+      // waiting slabs sit deeper the further off they are, so the one peeking
+      // at the bottom edge is always the one coming next
+      const waiting = Math.max(0, i - s - 1);
+      const ty = (1 - r) * 116 + waiting * 14 - c * 5;
+      const rot = -c * 1.8;
+      const sc = 1 - c * 0.05;
+      // a little tip forward while it is still rising, flattening as it lands —
+      // enough to read as a pane of glass moving in space
+      const tilt = (1 - r) * 7 - c * 2.5;
+      el.style.transform =
+        `translateY(${ty.toFixed(2)}%) rotateX(${tilt.toFixed(2)}deg)` +
+        ` rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
+      // fully clear of the frame before the pin starts, so the photograph
+      // is genuinely alone at the top of the section
+      el.style.opacity = r <= 0 ? '0' : '1';
 
-      const img = el.querySelector('.page_img');
-      if (img) img.style.filter = l ? `brightness(${(1 - l * 0.25).toFixed(3)})` : '';
-
-      // its figure rises with the sheet and leaves as the next one covers it
-      const type = el.querySelector('[data-page-type]');
-      if (type) {
-        const o = Math.min(clamp((a - 0.45) / 0.45), 1 - clamp(l / 0.35));
-        type.style.opacity = o.toFixed(3);
-        type.style.transform = `translateY(${((1 - a) * 26).toFixed(1)}px)`;
-
-        // …and travels right to left along the arc while the sheet is on top
-        const travel = i === 0 ? clamp(s / 0.8) : clamp((s - (i - 1)) / 1.8);
-        const path = el.querySelector('[data-page-path]');
-        if (path) path.setAttribute('startOffset', (54.5 - travel * 9).toFixed(2) + '%');
-      }
+      // the covered slab keeps its panel (its edge still shows at the top of
+      // the stack) but drops its words, so nothing reads through the frost
+      const body = el.querySelector('.slab_body');
+      if (body) body.style.opacity = (1 - clamp(c / 0.45)).toFixed(3);
     });
-
-    const idx = Math.round(s);
-    if (idx !== activeDot) {
-      pageDots.forEach((d, i) => d.classList.toggle('is-on', i === idx));
-      activeDot = idx;
-    }
   }
 
   /* ── 6. Marquee: drift + scroll-velocity boost ─────────── */
@@ -496,13 +536,15 @@
     updateHero();
     updateFills();
     updatePartners(now || 0);
+    updateHandoff();
     updateEditorial();
-    updateStory();
+    updateReveals();
+    updateFiles();
     updateStats();
 
     if (track && mWidth) {
       vel = lerp(vel, targetVel, 0.08);
-      mOff -= (0.7 + vel * 0.16);
+      mOff -= (1.35 + vel * 0.2);
       if (mOff <= -mWidth) mOff += mWidth;
       track.style.transform = `translate3d(${mOff}px,0,0)`;
     }
@@ -514,6 +556,46 @@
   addEventListener('resize', () => { measureMarquee(); measurePartners(); }, { passive: true });
   if (reduce) { updateHero(); updateFills(); }
   else requestAnimationFrame(frame);
+
+  /* ── 7b. Work with us ──────────────────────────────────── */
+  // One panel serves every "Work with us" on the page: book the call, or write.
+  const cPanel = document.querySelector('[data-connect-panel]');
+  if (cPanel) {
+    let lastFocus = null;
+    const openConnect = () => {
+      lastFocus = document.activeElement;
+      cPanel.hidden = false;
+      requestAnimationFrame(() => cPanel.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+      cPanel.querySelector('.connect_opt')?.focus();
+    };
+    const closeConnect = () => {
+      cPanel.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => { cPanel.hidden = true; }, reduce ? 0 : 420);
+      lastFocus?.focus();
+    };
+
+    document.querySelectorAll('[data-connect]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        // the mobile menu has one too — put it away first
+        if (html.classList.contains('is-menu-open')) {
+          html.classList.remove('is-menu-open');
+          document.querySelector('[data-menu-toggle]')?.setAttribute('aria-expanded', 'false');
+        }
+        openConnect();
+      });
+    });
+    cPanel.querySelectorAll('[data-connect-close]').forEach(el =>
+      el.addEventListener('click', closeConnect));
+    // following either option is the end of the errand
+    cPanel.querySelectorAll('.connect_opt').forEach(a =>
+      a.addEventListener('click', () => setTimeout(closeConnect, 120)));
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !cPanel.hidden) closeConnect();
+    });
+  }
 
   /* ── 8. Mobile menu ────────────────────────────────────── */
   const toggle = document.querySelector('[data-menu-toggle]');
