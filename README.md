@@ -1,9 +1,12 @@
-# Integrated Biosciences — front-end replica
+# AI+ — website
+
+The site for AI+, the community of AI founders, researchers and builders at the
+epicenter of the AI renaissance.
 
 Static site. No build step, no dependencies. Open `index.html`, or serve it:
 
 ```bash
-python3 -m http.server 8899
+python3 -m http.server 8080
 ```
 
 ## Files
@@ -12,54 +15,50 @@ python3 -m http.server 8899
 |---|---|
 | `index.html` | Full page markup |
 | `styles.css` | Tokens, components, layout, responsive rules |
-| `main.js` | All motion (~290 lines, vanilla) |
-| `assets/` | Video, photography, icons, favicon |
+| `main.js` | All motion (vanilla JS) |
+| `assets/` | Hero video, photography, partner logos, mentor photos, favicon |
 
-## Swapping in your own assets
+## Page sections
 
-Drop-in replacements — no markup changes needed if you keep the filenames:
+Hero (video) → Platform → Numbers → Company (industry discussions, founder
+dinners, product launches) → Partners → Mentors → Newsroom → Footer.
 
-| Asset | Used by | Notes |
-|---|---|---|
-| `assets/hero-loop.mp4` | Hero + footer backgrounds | Footer copy is mirrored in CSS |
-| `assets/company.jpg` | Company section | Landscape, 4:3 crop |
-| `assets/featured.jpg` | Featured article card | Landscape, 4:3 crop |
-| `assets/icon-1.svg` | Column 01 (mint) | Stroke must be dark |
-| `assets/icon-2.svg` | Column 02 (charcoal) | Stroke must be light |
-| `assets/icon-3.svg` | Column 03 (bone) | Stroke must be dark |
-| `assets/favicon.png` | Browser tab | 512×512 |
+The Newsroom cards link to posts on the
+[AI+ Substack](https://aiplusfounderscommunity.substack.com/); update the four
+cards in `index.html` when new posts go out.
 
-**The current media belongs to Integrated Biosciences** and is in place as a
-temporary stand-in for local development only. Replace before deploying.
+## Assets
 
-All body copy is placeholder text, sized and structured to match the real
-layout so swapping it in will not reflow anything.
+- Photos ship as AVIF → WebP → JPEG via `<picture>`, with a 1200w step for
+  large ones. When adding a photo, generate its `.avif`/`.webp` siblings too.
+- `hero-video.mp4` (1080p) and `hero-video-720.mp4` (mobile) are silent and
+  start at the loop's in-point; `data-start` on the `<video>` sets where the
+  loop restarts.
+- The intro's brick mark uses `assets/partners/partner-{3,5,6}.jpg`.
+- Partner logos live in `assets/logos/`, mentor photos in `assets/mentors/`.
 
 ## Design tokens
 
 Defined at the top of `styles.css` under `:root`:
 
-- **Colour** — `--c-dark` `#1f2c2b`, `--c-mint` `#cef79e`, `--c-off` `#f7f7f5`,
-  `--c-bone` `#e7e8e1`, `--c-deep` `#445e5f`, `--c-sage` `#c9cbbe`
-- **Type** — Manrope (display + body), Roboto Mono (labels, tags, buttons)
-- **Scale** — every size is a `clamp()`, fluid from 375px to 1680px
+- **Colour** — `--c-dark` `#000a45`, `--c-deep` `#0016a9`, `--c-mint` `#b1dfff`,
+  `--c-azure` `#0099ff`, `--c-bone` `#e8eaf0`, `--c-off` `#f6f6f6`
+- **Type** — Hanken Grotesk (display + body), Roboto Mono (labels, tags, buttons)
+- **Scale** — every size is a `clamp()`, fluid across viewport widths
 
 ## How the motion works
 
 | Effect | Where |
 |---|---|
-| Damped smooth scroll (drives real window scroll, so `sticky` still works) | `main.js` §6b |
-| Pinned hero: headline hands off to the scroll carousel at 14% of the pin | `main.js` §5 |
+| Intro: brick mark builds, then flies to the header logo | `main.js` §4 |
+| Pinned hero: headline hands off to the scroll carousel | `main.js` §5 |
+| Partner logos riding off-canvas orbits | `main.js` §5b |
+| Number slabs stacking on scroll | `main.js` §5c |
 | Word-by-word fill on headings as they cross the viewport | `main.js` §2 |
 | Marquee drift + scroll-velocity boost | `main.js` §6 |
-| Background video fading in over an animated gradient canvas | `main.js` §9 |
+| Damped smooth scroll (drives real window scroll, so `sticky` still works) | `main.js` §6b |
+| Background video with a held in-point | `main.js` §9 |
 | Staggered fade-up on `[data-inview]` elements | `main.js` §3 |
 
 Every effect is disabled or reduced under `prefers-reduced-motion`, and smooth
 scroll is skipped entirely on touch devices in favour of native momentum.
-
-## Known follow-ups
-
-- Photos ship as AVIF → WebP → JPEG via `<picture>`, with a 1200w step for
-  large ones. When adding a photo, generate its `.avif`/`.webp` siblings too.
-- Newsroom cards link to `#newsroom`; wire them to real article routes.
