@@ -47,6 +47,8 @@ body{
   padding:var(--frame);
 }
 img,svg,canvas{ display:block; max-width:100%; }
+/* <picture> only picks the format; the <img> inside lays out as if unwrapped */
+picture{ display:contents; }
 h1,h2,h3,p,ul,figure{ margin:0; }
 ul{ list-style:none; padding:0; }
 a{ color:inherit; text-decoration:none; }
@@ -175,11 +177,6 @@ a:hover .btn_label::after,button:hover .btn_label::after{ transform:translateY(0
   100%{transform:translate(0,0)}
 }
 @media (prefers-reduced-motion:reduce){ .hero_grain{ animation:none; } }
-
-.bg_grain{
-  position:absolute; inset:0; opacity:.07; mix-blend-mode:overlay; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
 /* ── intro ───────────────────────────────────────────────── */
 /* The mark is built from bricks that carry crops of event photography, so it
@@ -500,27 +497,6 @@ a:hover .btn_label::after,button:hover .btn_label::after{ transform:translateY(0
   .ed_line path{ stroke-dashoffset:0; }
   [data-reveal]{ opacity:1 !important; transform:none !important; }
 }
-
-/* ── generic block ───────────────────────────────────────── */
-.c-block{ background:var(--c-off); padding-block:var(--pad); }
-.block_grid{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2.6fr);
-  gap:clamp(1.5rem,1rem+3vw,4rem);
-}
-.block_grid.-tagrow{ padding-bottom:7.5rem; }
-.block_side .u-tag{ position:sticky; top:7rem; }
-.block_heading{
-  font-size:var(--t-h2); font-weight:400; line-height:1.04; letter-spacing:-.035em;
-  max-width:19ch;
-}
-.block_heading.-md{ font-size:clamp(1.5rem,1rem+1.6vw,2.6rem); max-width:22ch; line-height:1.15; }
-.block_heading .fw{ color:#c3c8d6; }
-.block_heading .fw.is-lit{ color:var(--c-dark); }
-.block_text{
-  margin-top:clamp(2rem,1rem+3vw,4rem); max-width:62ch;
-  color:rgba(0,8,60,.72); line-height:1.6;
-}
-.block_body > [data-inview]:last-child{ margin-top:4.5rem; }
 
 /* ── story: the intro, then files fanning out of a drawer ── */
 .c-story{
@@ -1096,12 +1072,6 @@ a:hover .btn_label::after,button:hover .btn_label::after{ transform:translateY(0
 .footer_legal{ display:flex; flex-wrap:wrap; gap:1.75rem; font-size:.95rem; color:rgba(246,246,246,.62); }
 .footer_legal a:hover{ color:var(--c-off); }
 
-.footer_credit{ text-align:right; }
-.footer_credit .u-mono{ color:rgba(246,246,246,.45); }
-.credit_marks{
-  margin-top:.65rem; display:flex; gap:1.25rem; justify-content:flex-end;
-  font-weight:600; letter-spacing:-.01em; opacity:.85;
-}
 .footer_up{
   width:3rem; height:3rem; border-radius:100px; flex:none;
   border:1px solid rgba(246,246,246,.3); display:grid; place-items:center;
@@ -1144,9 +1114,6 @@ a:hover .btn_label::after,button:hover .btn_label::after{ transform:translateY(0
 @media (max-width:1100px){
   .hero_heading{ font-size:4.5rem; max-width:90%; }
   .hero_intro{ padding:8rem 2.5rem 2.5rem; }
-  .block_grid{ grid-template-columns:1fr; }
-  .block_side .u-tag{ position:static; }
-  .company_image{ aspect-ratio:16/10; }
   .scroller_stage,.scroller_top{ padding-inline:2.5rem; }
   .scroller_body{ max-width:80%; }
   .scroller_item{ font-size:2.2rem; }
@@ -1162,11 +1129,8 @@ a:hover .btn_label::after,button:hover .btn_label::after{ transform:translateY(0
   .c-header{ top:1rem; left:1rem; right:1rem; }
   .header_nav{ display:none; }
   .menu_btn{ display:flex; }
-  .c-columns{ grid-template-columns:1fr; }
-  .col{ min-height:auto; }
   .post-feature{ grid-template-columns:1fr; }
   .posts_grid{ grid-template-columns:1fr; }
-  .company_cols{ grid-template-columns:1fr; }
 }
 @media (max-width:600px){
   .scroller_item{ font-size:1.35rem; }
@@ -1178,8 +1142,6 @@ a:hover .btn_label::after,button:hover .btn_label::after{ transform:translateY(0
   .hero_foot{ flex-direction:column; align-items:flex-start; }
   .footer_top{ grid-template-columns:1fr; }
   .footer_bottom{ flex-direction:column; align-items:flex-start; }
-  .footer_credit{ text-align:left; }
-  .credit_marks{ justify-content:flex-start; }
   .footer_copy{ left:1.5rem; }
 }
 

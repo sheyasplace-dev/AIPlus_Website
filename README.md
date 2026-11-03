@@ -60,7 +60,6 @@ scroll is skipped entirely on touch devices in favour of native momentum.
 
 ## Known follow-ups
 
-- `hero-loop.mp4` is ~23MB and dominates page weight. Compress to 3–5MB and add
-  a `poster` frame (needs `ffmpeg`, not available in the environment this was
-  built in).
+- Photos ship as AVIF → WebP → JPEG via `<picture>`, with a 1200w step for
+  large ones. When adding a photo, generate its `.avif`/`.webp` siblings too.
 - Newsroom cards link to `#newsroom`; wire them to real article routes.

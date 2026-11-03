@@ -8,8 +8,13 @@
 <link rel="icon" href="assets/favicon.png" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=113">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=114">
+<!-- the intro's brick photos and the hero still are the first things painted -->
+<link rel="preload" as="image" href="assets/partners/partner-3.jpg">
+<link rel="preload" as="image" href="assets/partners/partner-5.jpg">
+<link rel="preload" as="image" href="assets/partners/partner-6.jpg">
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/hero-poster-1200.avif 1200w, assets/hero-poster.avif 1600w" imagesizes="100vw" fetchpriority="high">
 </head>
 <body>
 
@@ -170,10 +175,13 @@
       <figure class="hero_bg">
         <!-- first frame of the loop, held behind the video: if the clip is
              blocked, still buffering or unsupported, the hero still reads -->
-        <img class="hero_still" src="assets/hero-poster.jpg" alt="" aria-hidden="true">
-        <video class="hero_video" data-video data-start="16" autoplay muted loop playsinline
-               preload="auto" disablepictureinpicture aria-hidden="true"
-               poster="assets/hero-poster.jpg">
+        <picture>
+          <source type="image/avif" srcset="assets/hero-poster-1200.avif 1200w, assets/hero-poster.avif 1600w" sizes="100vw">
+          <source type="image/webp" srcset="assets/hero-poster-1200.webp 1200w, assets/hero-poster.webp 1600w" sizes="100vw">
+          <img class="hero_still" src="assets/hero-poster.jpg" alt="" aria-hidden="true" fetchpriority="high" width="1600" height="900">
+        </picture>
+        <video class="hero_video" data-video data-start="0.985" autoplay muted loop playsinline
+               preload="auto" disablepictureinpicture aria-hidden="true">
           <source src="assets/hero-video-720.mp4" type="video/mp4" media="(max-width:900px)">
           <source src="assets/hero-video.mp4" type="video/mp4">
         </video>
@@ -254,7 +262,11 @@
   <section class="c-stats" data-stats>
     <div class="stats_sticky">
       <div class="stats_bed" aria-hidden="true">
-        <img class="bed_img" src="assets/stats/backdrop.jpg" alt="" decoding="async" data-bed>
+        <picture>
+          <source type="image/avif" srcset="assets/stats/backdrop-1200.avif 1200w, assets/stats/backdrop-1800.avif 1800w, assets/stats/backdrop.avif 2400w" sizes="100vw">
+          <source type="image/webp" srcset="assets/stats/backdrop-1200.webp 1200w, assets/stats/backdrop-1800.webp 1800w, assets/stats/backdrop.webp 2400w" sizes="100vw">
+          <img class="bed_img" src="assets/stats/backdrop.jpg" alt="" decoding="async" fetchpriority="low" width="2400" height="1600" data-bed>
+        </picture>
         <span class="bed_veil"></span>
       </div>
 
@@ -338,7 +350,11 @@
             <div class="file_body">
               <p class="file_text">Closed doors panels and discussions with core engineers and scientists from leading AI labs and startups.</p>
               <figure class="file_media">
-                <img src="assets/stats/stat-3.jpg" alt="A panel session at an AI+ event" decoding="async" fetchpriority="low" width="1800" height="1125">
+                <picture>
+                  <source type="image/avif" srcset="assets/stats/stat-3-1200.avif 1200w, assets/stats/stat-3.avif 1800w" sizes="(max-width: 900px) 100vw, 50vw">
+                  <source type="image/webp" srcset="assets/stats/stat-3-1200.webp 1200w, assets/stats/stat-3.webp 1800w" sizes="(max-width: 900px) 100vw, 50vw">
+                  <img src="assets/stats/stat-3.jpg" alt="A panel session at an AI+ event" decoding="async" fetchpriority="low" width="1800" height="1125">
+                </picture>
               </figure>
             </div>
           </div>
@@ -352,7 +368,11 @@
             <div class="file_body">
               <p class="file_text">Curated gatherings where we help AI startups close customers, work with enterprises, and raise funding.</p>
               <figure class="file_media">
-                <img src="assets/stats/founder-dinner.jpg" alt="Founders gathered at an AI+ dinner" decoding="async" fetchpriority="low" width="1800" height="1125">
+                <picture>
+                  <source type="image/avif" srcset="assets/stats/founder-dinner-1200.avif 1200w, assets/stats/founder-dinner.avif 1800w" sizes="(max-width: 900px) 100vw, 50vw">
+                  <source type="image/webp" srcset="assets/stats/founder-dinner-1200.webp 1200w, assets/stats/founder-dinner.webp 1800w" sizes="(max-width: 900px) 100vw, 50vw">
+                  <img src="assets/stats/founder-dinner.jpg" alt="Founders gathered at an AI+ dinner" decoding="async" fetchpriority="low" width="1800" height="1125">
+                </picture>
               </figure>
             </div>
           </div>
@@ -366,7 +386,11 @@
             <div class="file_body">
               <p class="file_text">AI+ is your launchpad — your one stage to launch anything in AI with maximum impact.</p>
               <figure class="file_media">
-                <img src="assets/stats/product-launch.jpg" alt="A product launch on the main stage at Renaissance" decoding="async" fetchpriority="low" width="1800" height="1125">
+                <picture>
+                  <source type="image/avif" srcset="assets/stats/product-launch-1200.avif 1200w, assets/stats/product-launch.avif 1800w" sizes="(max-width: 900px) 100vw, 50vw">
+                  <source type="image/webp" srcset="assets/stats/product-launch-1200.webp 1200w, assets/stats/product-launch.webp 1800w" sizes="(max-width: 900px) 100vw, 50vw">
+                  <img src="assets/stats/product-launch.jpg" alt="A product launch on the main stage at Renaissance" decoding="async" fetchpriority="low" width="1800" height="1125">
+                </picture>
               </figure>
             </div>
           </div>
@@ -582,7 +606,11 @@
       <div class="mentors_grid">
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/parag-agrawal.jpg" alt="Parag Agrawal" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/parag-agrawal.avif">
+              <source type="image/webp" srcset="assets/mentors/parag-agrawal.webp">
+              <img class="mentor_photo" src="assets/mentors/parag-agrawal.jpg" alt="Parag Agrawal" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Parallel Web Systems</span>
           </div>
           <div class="mentor_info">
@@ -592,7 +620,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/michele-catasta.jpg" alt="Michele Catasta" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/michele-catasta.avif">
+              <source type="image/webp" srcset="assets/mentors/michele-catasta.webp">
+              <img class="mentor_photo" src="assets/mentors/michele-catasta.jpg" alt="Michele Catasta" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Replit</span>
           </div>
           <div class="mentor_info">
@@ -602,7 +634,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/matt-white.jpg" alt="Matt White" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/matt-white.avif">
+              <source type="image/webp" srcset="assets/mentors/matt-white.webp">
+              <img class="mentor_photo" src="assets/mentors/matt-white.jpg" alt="Matt White" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">The Linux Foundation</span>
           </div>
           <div class="mentor_info">
@@ -612,7 +648,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/jeff-wang.jpg" alt="Jeff Wang" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/jeff-wang.avif">
+              <source type="image/webp" srcset="assets/mentors/jeff-wang.webp">
+              <img class="mentor_photo" src="assets/mentors/jeff-wang.jpg" alt="Jeff Wang" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Windsurf</span>
           </div>
           <div class="mentor_info">
@@ -622,7 +662,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/tanay-kothari.jpg" alt="Tanay Kothari" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/tanay-kothari.avif">
+              <source type="image/webp" srcset="assets/mentors/tanay-kothari.webp">
+              <img class="mentor_photo" src="assets/mentors/tanay-kothari.jpg" alt="Tanay Kothari" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Wispr Flow</span>
           </div>
           <div class="mentor_info">
@@ -632,7 +676,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/jorge-torres.jpg" alt="Jorge Torres" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/jorge-torres.avif">
+              <source type="image/webp" srcset="assets/mentors/jorge-torres.webp">
+              <img class="mentor_photo" src="assets/mentors/jorge-torres.jpg" alt="Jorge Torres" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">MindsDB</span>
           </div>
           <div class="mentor_info">
@@ -642,7 +690,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/jason-lopatecki.jpg" alt="Jason Lopatecki" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/jason-lopatecki.avif">
+              <source type="image/webp" srcset="assets/mentors/jason-lopatecki.webp">
+              <img class="mentor_photo" src="assets/mentors/jason-lopatecki.jpg" alt="Jason Lopatecki" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Arize AI</span>
           </div>
           <div class="mentor_info">
@@ -652,7 +704,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/philip-rathle.jpg" alt="Philip Rathle" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/philip-rathle.avif">
+              <source type="image/webp" srcset="assets/mentors/philip-rathle.webp">
+              <img class="mentor_photo" src="assets/mentors/philip-rathle.jpg" alt="Philip Rathle" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Neo4j</span>
           </div>
           <div class="mentor_info">
@@ -662,7 +718,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/lenjoy-lin.jpg" alt="Lenjoy Lin" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/lenjoy-lin.avif">
+              <source type="image/webp" srcset="assets/mentors/lenjoy-lin.webp">
+              <img class="mentor_photo" src="assets/mentors/lenjoy-lin.jpg" alt="Lenjoy Lin" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Genspark</span>
           </div>
           <div class="mentor_info">
@@ -672,7 +732,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/ryan-wang.jpg" alt="Ryan Wang" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/ryan-wang.avif">
+              <source type="image/webp" srcset="assets/mentors/ryan-wang.webp">
+              <img class="mentor_photo" src="assets/mentors/ryan-wang.jpg" alt="Ryan Wang" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Assembled</span>
           </div>
           <div class="mentor_info">
@@ -682,7 +746,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/hassaan-raza.jpg" alt="Hassaan Raza" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/hassaan-raza.avif">
+              <source type="image/webp" srcset="assets/mentors/hassaan-raza.webp">
+              <img class="mentor_photo" src="assets/mentors/hassaan-raza.jpg" alt="Hassaan Raza" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">Tavus</span>
           </div>
           <div class="mentor_info">
@@ -692,7 +760,11 @@
         </article>
         <article class="mentor" data-inview>
           <div class="mentor_tile">
-            <img class="mentor_photo" src="assets/mentors/nathan-xu.jpg" alt="Nathan Xu" loading="lazy" decoding="async" width="700" height="700">
+            <picture>
+              <source type="image/avif" srcset="assets/mentors/nathan-xu.avif">
+              <source type="image/webp" srcset="assets/mentors/nathan-xu.webp">
+              <img class="mentor_photo" src="assets/mentors/nathan-xu.jpg" alt="Nathan Xu" loading="lazy" decoding="async" width="700" height="700">
+            </picture>
             <span class="mentor_badge">PLAUD</span>
           </div>
           <div class="mentor_info">
@@ -722,7 +794,11 @@
 
       <a class="post-feature" href="#newsroom" data-inview>
         <figure class="feature_image" data-parallax>
-          <img src="assets/featured-web.jpg" alt="AI+ Renaissance summit" width="1800" height="1200">
+          <picture>
+            <source type="image/avif" srcset="assets/featured-web-1200.avif 1200w, assets/featured-web.avif 1800w" sizes="(max-width: 900px) 100vw, 60vw">
+            <source type="image/webp" srcset="assets/featured-web-1200.webp 1200w, assets/featured-web.webp 1800w" sizes="(max-width: 900px) 100vw, 60vw">
+            <img src="assets/featured-web.jpg" alt="AI+ Renaissance summit" loading="lazy" decoding="async" width="1800" height="1200">
+          </picture>
         </figure>
         <div class="feature_body">
           <div class="post_meta">
@@ -837,7 +913,11 @@
   </div>
 
   <figure class="footer_photo">
-    <img src="assets/footer-team.jpg" alt="The AI+ community">
+    <picture>
+      <source type="image/avif" srcset="assets/footer-team-1200.avif 1200w, assets/footer-team.avif 1600w" sizes="100vw">
+      <source type="image/webp" srcset="assets/footer-team-1200.webp 1200w, assets/footer-team.webp 1600w" sizes="100vw">
+      <img src="assets/footer-team.jpg" alt="The AI+ community" loading="lazy" decoding="async" width="1600" height="1066">
+    </picture>
     <div class="photo_veil" aria-hidden="true"></div>
   </figure>
 
@@ -875,6 +955,6 @@
   </div>
 </div>
 
-<script src="main.js?v=113"></script>
+<script src="main.js?v=114"></script>
 </body>
 </html>
